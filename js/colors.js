@@ -1,5 +1,3 @@
-
-
 export default {
-    red: '#red'
+  red: "#red"
 };

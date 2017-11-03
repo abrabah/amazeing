@@ -1,3 +1,1 @@
-export default  drawMaze = ({ctx, width,height,board}) => {
-
-};
+export default (drawMaze = ({ ctx, width, height, board }) => {});
