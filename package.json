@@ -5,12 +5,14 @@
   "author": "abrabah",
   "license": "MIT",
   "scripts": {
-    "watch": "budo makeitpretty.js --live -- -t [ babelify --presets env ]"
+    "watch": "budo makeitpretty.js --live -- -t [ babelify --presets env ]",
+    "pretty": "prettier --no-config --write giveitbrains.js 'js/**/*.js'"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babelify": "^8.0.0",
-    "budo": "^10.0.4"
+    "budo": "^10.0.4",
+    "prettier": "^1.7.4"
   },
   "dependencies": {
     "babel-preset-env": "^1.6.1"
