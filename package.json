@@ -1,0 +1,30 @@
+{
+  "name": "amazeing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "abrabah",
+  "license": "MIT",
+  "scripts": {
+    "watch": "budo index.js --live --open -- -t [ babelify ]"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-polyfill": "^6.26.0",
+    "babelify": "^8.0.0",
+    "budo": "^10.0.4"
+  },
+  "dependencies": {
+    "babel-preset-env": "^1.6.1"
+  }
+}
