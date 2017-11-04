@@ -19,3 +19,4 @@ Run the following commands to get started
 ## TODO
 
 * need a mapping between color and wall/room/pillar..   
+* create message function and bind it to window.. Use it for displaying messages.. 
