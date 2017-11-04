@@ -1,11 +1,12 @@
-import drawGrid from "./js/gridDrawer";
+import drawGrid from "./js/grid-drawer";
 import initGrid from "./js/grid";
+import {listRooms} from './js/prims-algorithm';
 
-const canvasWidth = 1000,
+const canvasWidth = 500;
 const canvasHeight = 500;
 
-const gridWidth = 256,
-const gridHeight = 128;
+const gridWidth = 64;
+const gridHeight = 64;
 
 function initCanvasAndReturn2dContext() {
   const canvas = document.querySelector("#canvas");
