@@ -1,6 +1,6 @@
 import drawGrid from "./js/grid-drawer";
 import initGrid from "./js/grid";
-import {listRooms} from './js/prims-algorithm';
+import { listRooms } from "./js/prims-algorithm";
 
 const canvasWidth = 500;
 const canvasHeight = 500;
