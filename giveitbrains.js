@@ -1,8 +1,8 @@
 import drawGrid  from './js/gridDrawer';
 import initGrid from './js/grid';
 
-const canvasWidth = 500, canvasHeight = 500;
-const gridHeight = 20, gridWidth = 20;
+const canvasWidth = 1000, canvasHeight = 500;
+const gridWidth = 256, gridHeight = 128;
 
 function initCanvasAndReturn2dContext(){
     const canvas = document.querySelector('#canvas');
