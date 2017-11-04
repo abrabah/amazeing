@@ -5,7 +5,7 @@
   "author": "abrabah",
   "license": "MIT",
   "scripts": {
-    "watch": "budo giveitbrains.js --live -- -t [ babelify --presets env ]",
+    "watch": "budo giveitbrains.js --live --open -- -t [ babelify --presets env ]",
     "pretty": "prettier --no-config --write giveitbrains.js 'js/**/*.js'"
   },
   "devDependencies": {
