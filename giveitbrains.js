@@ -1,26 +1,29 @@
-import drawGrid  from './js/gridDrawer';
-import initGrid from './js/grid';
+import drawGrid from "./js/gridDrawer";
+import initGrid from "./js/grid";
 
-const canvasWidth = 1000, canvasHeight = 500;
-const gridWidth = 256, gridHeight = 128;
+const canvasWidth = 1000,
+const canvasHeight = 500;
 
-function initCanvasAndReturn2dContext(){
-    const canvas = document.querySelector('#canvas');
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
+const gridWidth = 256,
+const gridHeight = 128;
 
-    const context = canvas.getContext('2d');
+function initCanvasAndReturn2dContext() {
+  const canvas = document.querySelector("#canvas");
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
 
-    return context;
+  const context = canvas.getContext("2d");
+
+  return context;
 }
 
 window.onload = () => {
-    const ctx = initCanvasAndReturn2dContext();
+  const ctx = initCanvasAndReturn2dContext();
 
-    drawGrid({
-        ctx, 
-        width:canvasWidth, 
-        height:canvasHeight, 
-        grid: initGrid({gridHeight,gridWidth})
-    });
+  drawGrid({
+    ctx,
+    width: canvasWidth,
+    height: canvasHeight,
+    grid: initGrid({ gridHeight, gridWidth })
+  });
 };
