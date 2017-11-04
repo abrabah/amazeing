@@ -5,8 +5,8 @@ export default ({ ctx, width, height, grid }) => {
   const boardHeight = grid.length;
   const boardWidth = grid.length > 0 ? grid[0].length : 0;
 
-  const rectWidth = Math.ceil(width / boardWidth);
-  const rectHight = Math.ceil(height / boardHeight);
+  const rectWidth = Math.floor(width / boardWidth);
+  const rectHight = Math.floor(height / boardHeight);
 
   for (let i = 0; i < boardWidth; i++) {
     for (let j = 0; j < boardHeight; j++) {
