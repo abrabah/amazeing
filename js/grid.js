@@ -5,7 +5,7 @@ const kernels = {
   blueWhiteRed: {
     width: 2,
     height: 2,
-    map: [[colormap.red, colormap.blue], [colormap.blue, colormap.white]]
+    map: [[colormap.red, colormap.blue], [colormap.blue, colormap.background]]
   }
 };
 
@@ -20,7 +20,7 @@ export const GRID_DESCRIPTION = {
 export const generateGrid = ({
   seed,
   isWall = ({ seed, point }) => seed[point[0]][point[1]] === colormap.blue,
-  isRoom = ({ seed, point }) => seed[point[0]][point[1]] === colormap.white,
+  isRoom = ({ seed, point }) => seed[point[0]][point[1]] === colormap.background,
   isPillar = ({ seed, point }) => seed[point[0]][point[1]] === colormap.red
 }) =>
   seed.map((column, x) =>

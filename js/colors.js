@@ -1,9 +1,14 @@
-const makeColor = (r, g, b) => `rgb(${r},${g},${b})`;
 
+//colors come from 
 export default {
-  red: makeColor(255, 0, 0),
-  green: makeColor(0, 255, 0),
-  blue: makeColor(0, 0, 255),
-  white: makeColor(255, 255, 255),
-  black: makeColor(0, 0, 0)
+  yellow:    '#b58900',
+  orange:    '#cb4b16',
+  red:       '#dc322f',
+  magenta:   '#d33682',
+  violet:    '#6c71c4',
+  blue:      '#268bd2',
+  cyan:      '#2aa198',
+  green:     '#859900',
+  background: '#fdf6e3',
+  foreground: '#657b83'
 };
