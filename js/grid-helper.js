@@ -17,10 +17,14 @@ export const findNeighborsOfType = ({
 
 const getRooms = (column, column_number) =>
   column
+    .map((elm, y) => {
+      return { elm, point: [column_number, y] };
+    })
     .filter(
-      elm => elm === GRID_DESCRIPTION.ROOM || GRID_DESCRIPTION.ROOM_ON_PATH
+      ({ elm }) =>
+        elm === GRID_DESCRIPTION.ROOM || elm === GRID_DESCRIPTION.ROOM_ON_PATH
     )
-    .map((elm, y) => [column_number, y]);
+    .map(({ point }) => point);
 
 export const listIndicesOfAllRooms = grid =>
   grid.reduce(

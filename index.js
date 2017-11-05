@@ -5,8 +5,8 @@ import { carveMaze } from "./js/maze-carver";
 const canvasWidth = 500;
 const canvasHeight = 500;
 
-const gridWidth = 63;
-const gridHeight = 63;
+const gridWidth = 33;
+const gridHeight = 33;
 
 function initCanvasAndReturn2dContext(canvasId) {
   const canvas = document.querySelector(canvasId);

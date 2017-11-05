@@ -9,8 +9,8 @@ const draw = ({
   arrayWidth,
   arrayHeight
 }) => {
-  const rectWidth = canvasWidth / arrayWidth;
-  const rectHight = canvasWidth / arrayHeight;
+  const rectWidth = Math.floor(canvasWidth / arrayWidth);
+  const rectHight = Math.floor(canvasWidth / arrayHeight);
 
   for (let x = 0; x < arrayWidth; x++) {
     for (let y = 0; y < arrayHeight; y++) {
@@ -57,9 +57,10 @@ export const drawGrid = ({
         case GRID_DESCRIPTION.WALL_OPEN:
           return colormap.background;
         case GRID_DESCRIPTION.WALL_CLOSED:
-          return colormap.foreground;
+        case GRID_DESCRIPTION.PILLAR:
+          return colormap.violet;
         default:
-          // console.log(`got illegal grid description ${elm} at [${x},${y}]`);
+          console.log(`got illegal grid description ${elm} at [${x},${y}]`);
           return colormap.red;
       }
     })

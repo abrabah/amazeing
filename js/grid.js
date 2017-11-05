@@ -10,11 +10,11 @@ const kernels = {
 };
 
 export const GRID_DESCRIPTION = {
-  WALL_CLOSED: 0,
-  WALL_OPEN: 1,
-  PILLAR: 2,
-  ROOM: 3,
-  ROOM_ON_PATH: 4
+  WALL_CLOSED: "wc",
+  WALL_OPEN: "wo",
+  PILLAR: "pi",
+  ROOM: "r",
+  ROOM_ON_PATH: "ro_p"
 };
 
 export const generateGrid = ({
@@ -27,7 +27,6 @@ export const generateGrid = ({
   seed.map((column, x) =>
     column.map((elm, y) => {
       const point = [x, y];
-
       if (isWall({ seed, point })) return GRID_DESCRIPTION.WALL_CLOSED;
       if (isRoom({ seed, point })) return GRID_DESCRIPTION.ROOM;
       if (isPillar({ seed, point })) return GRID_DESCRIPTION.PILLAR;

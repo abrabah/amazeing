@@ -9,7 +9,7 @@ const findNeighborWalls = ({ grid, point }) =>
   findNeighborsOfType({
     grid,
     point,
-    types: [GRID_DESCRIPTION.CLOSED_WALL_TYPE]
+    types: [GRID_DESCRIPTION.WALL_CLOSED]
   });
 
 //TODO: padd grid to ensure that to ensure that the the maze is walled in?
@@ -18,18 +18,18 @@ export const carveMaze = ({
   gridWidth,
   gridHeight,
   selectStartRoom = ({ grid, rooms }) => rooms[0],
-  selectWallToWisit = walls => 0
+  selectWallToWisit = walls => Math.floor(Math.random() * walls.length)
 }) => {
   const startPosition = selectStartRoom({
     grid,
     rooms: listIndicesOfAllRooms(grid)
   });
-  grid[startPosition[1]][startPosition[0]] = GRID_DESCRIPTION.ROOM_ON_PATH;
+  grid[startPosition[0]][startPosition[1]] = GRID_DESCRIPTION.ROOM_ON_PATH;
 
-  const wallsToWisit = [findNeighborWalls({ grid, point: startPosition })];
+  const wallsToWisit = findNeighborWalls({ grid, point: startPosition });
 
   while (wallsToWisit.length > 0) {
-    const { index } = selectWallToWisit(wallsToWisit);
+    const index = selectWallToWisit(wallsToWisit);
     const [wall] = wallsToWisit.splice(index, 1);
 
     const adjacentRooms = findNeighborsOfType({
@@ -45,9 +45,13 @@ export const carveMaze = ({
       });
 
       if (roomsNotOnPath.length == 1) {
-        grid[wall.y][wall.x] = GRID_DESCRIPTION.WALL_OPEN;
-        const [roomNotNotPath_x, roomNotOnPath_y] = roomsNotOnPath.pop();
-        grid[roomNotOnPath_y][roomNotNotPath_x] = GRID_DESCRIPTION.ROOM_ON_PATH;
+        grid[wall[0]][wall[1]] = GRID_DESCRIPTION.WALL_OPEN;
+        const roomNotOnPath = roomsNotOnPath.pop();
+        grid[roomNotOnPath[0]][roomNotOnPath[1]] =
+          GRID_DESCRIPTION.ROOM_ON_PATH;
+        findNeighborWalls({ grid, point: roomNotOnPath }).forEach(elm =>
+          wallsToWisit.push(elm)
+        );
       }
     }
   }
