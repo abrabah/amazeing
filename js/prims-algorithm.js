@@ -1,3 +1,5 @@
+import { GRID_DESCRIPTION } from "./grid";
+
 const elementsNotContained = (array, elements) =>
   elements.filter(!Array.includes);
 const findAdjacentWalls = ({ grid, point, blacklist }) => {
@@ -6,10 +8,22 @@ const findAdjacentWalls = ({ grid, point, blacklist }) => {
   return [];
 };
 
-const findAdjacentRooms = ({ grid, point }) => {
-  // find all adjacent rooms in grid given point = {x,y}
-  return [];
-};
+const findAdjacentRooms = ({ grid, point = { x, y } }) =>
+  [1, 0, -1]
+    .reduce(
+      (acc, _x) =>
+        acc.concat(
+          [1, 0, -1].map(_y => {
+            return { _x, _y };
+          })
+        ),
+      []
+    )
+    .filter((point = { _x, _y }) => !(_x == 0 && _y == 0))
+    .map((point = { _x, _y }) => {
+      return { x: x + _x, y: y + _y };
+    })
+    .filter((point = { _x, _y }) => grid[_y][_x] === GRID_DESCRIPTION.ROOM);
 
 const selectWallToWisit = walls => {
   // given a list of walls = [ {x,y}, ... ]. select the wall to wisit
@@ -27,35 +41,33 @@ const selectStartRoom = rooms => {
   else return rooms[0];
 };
 
-const listRooms = grid => {
-  // return a list of all the rooms = [ {x,y}, ..] in the grid.
-  //     export const listRooms = ({ grid, isRoom }) => grid.reduce((acc, row, y) =>
-  //     acc.concat(
-  //         row.map((elm, x) => ({x, y}))
-  //         .filter(({x,y}) => isRoom({grid,x,y}))),
-  // []);
+export const listRooms = seed =>
+  seed.reduce((acc, row, y) =>
+    acc.concat(
+      row
+        .map((elm, x) => ({ x, y }))
+        .filter(({ x, y }) => grid[y][x] === GRID_DESCRIPTION.ROOM),
+      []
+    )
+  );
 
-  return [];
-};
-
+//TODO: padd grid to ensure that to ensure that the the maze is walled in?
 export default ({
   grid,
   gridWidth,
   gridHeight,
-  //startpos padding prodection?
   selectStartRoom = selectStartRoom,
   findAdjacentWalls = findAdjacentWalls,
-  findAdjacentRooms = findAdjacentRooms,
-  selectWallToWisit = selectWallToWisit,
-  listRooms = listRooms
+  selectWallToWisit = selectWallToWisit
 }) => {
+  // convert grid to maze, carve out maze..
+
   const path = [selectStartRoom({ grid, rooms: listRooms(grid) })];
 
   if (path.length == 0)
     throw Error("no start room selected.. Cannot continue :/ ");
 
   const wallsToWisit = [findAdjacentWalls(grid, path[0], [])];
-  const openWalls = [];
 
   while (wallsToWisit.length > 0) {
     const { index } = selectWallToWisit(wallsToWisit);
