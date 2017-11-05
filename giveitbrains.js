@@ -17,7 +17,7 @@ function initCanvasAndReturn2dContext() {
 
   return context;
 }
-
+//TODO: rename grid to seed?
 window.onload = () => {
   const ctx = initCanvasAndReturn2dContext();
 

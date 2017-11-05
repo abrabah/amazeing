@@ -5,10 +5,19 @@
   "author": "abrabah",
   "license": "MIT",
   "scripts": {
-    "watch": "budo giveitbrains.js --live --open -- -t [ babelify --presets env ]",
-    "pretty": "prettier --no-config --write giveitbrains.js 'js/**/*.js'"
+    "watch": "budo giveitbrains.js --live --open -- -t [ babelify ]",
+    "pretty": "prettier --no-config --write giveitbrains.js 'js/**/*.js'",
+    "test": "ava"
+  },
+  "ava": {
+    "babel": "inherit", 
+    "require": ["babel-register"]
+  },
+  "babel": {
+    "presets": ["env"]
   },
   "devDependencies": {
+    "ava": "^0.23.0",
     "babel-core": "^6.26.0",
     "babelify": "^8.0.0",
     "budo": "^10.0.4",
