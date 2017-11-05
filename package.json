@@ -1,12 +1,12 @@
 {
   "name": "amazeing",
   "version": "1.0.0",
-  "main": "giveitbrains.js",
+  "main": "index.js",
   "author": "abrabah",
   "license": "MIT",
   "scripts": {
-    "watch": "budo giveitbrains.js --live --open -- -t [ babelify ]",
-    "pretty": "prettier --no-config --write giveitbrains.js 'js/**/*.js'",
+    "watch": "budo index.js --live --open -- -t [ babelify ]",
+    "pretty": "prettier --no-config --write index.js 'js/**/*.js'",
     "test": "ava"
   },
   "ava": {

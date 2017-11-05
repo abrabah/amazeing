@@ -2,14 +2,10 @@ import colormap from "./colors";
 
 //TODO: does kernels belong here?
 const kernels = {
-  blueWhite: {
+  blueWhiteRed: {
     width: 2,
     height: 2,
-    map: [
-      [colormap.blue, colormap.white],
-      [colormap.white, colormap.blue],
-      [colormap.blue, colormap.white]
-    ]
+    map: [[colormap.red, colormap.blue], [colormap.blue, colormap.white]]
   }
 };
 
@@ -21,14 +17,19 @@ export const GRID_DESCRIPTION = {
   ROOM_ON_PATH: 4
 };
 
-export const generateGrid = ({ seed, isWall, isRoom, isPillar }) =>
-  seed.map((row, y) =>
-    row.map((elm, c) => {
-      if (isWall({ grid, point })) return GRID_DESCRIPTION.WALL_CLOSED;
+export const generateGrid = ({
+  seed,
+  isWall = ({ seed, point }) => seed[point[0]][point[1]] === colormap.blue,
+  isRoom = ({ seed, point }) => seed[point[0]][point[1]] === colormap.white,
+  isPillar = ({ seed, point }) => seed[point[0]][point[1]] === colormap.red
+}) =>
+  seed.map((column, x) =>
+    column.map((elm, y) => {
+      const point = [x, y];
 
-      if (isRoom({ grid, pont })) return GRID_DESCRIPTION.ROOM;
-
-      if (isPillar({ grid, point })) return GRID_DESCRIPTION.PILLAR;
+      if (isWall({ seed, point })) return GRID_DESCRIPTION.WALL_CLOSED;
+      if (isRoom({ seed, point })) return GRID_DESCRIPTION.ROOM;
+      if (isPillar({ seed, point })) return GRID_DESCRIPTION.PILLAR;
 
       throw Error(`unknown type detected at ${point}`);
     })
@@ -37,13 +38,13 @@ export const generateGrid = ({ seed, isWall, isRoom, isPillar }) =>
 export const generateSeed = ({
   gridHeight,
   gridWidth,
-  kernel = kernels.blueWhite
+  kernel = kernels.blueWhiteRed
 }) => {
-  return new Array(gridHeight)
+  return new Array(gridWidth)
     .fill(0)
-    .map((_, y) =>
-      new Array(gridWidth)
+    .map((_, x) =>
+      new Array(gridHeight)
         .fill(0)
-        .map((_, x) => kernel.map[x % kernel.width][y % kernel.height])
+        .map((_, y) => kernel.map[x % kernel.width][y % kernel.height])
     );
 };

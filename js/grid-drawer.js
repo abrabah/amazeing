@@ -1,21 +1,24 @@
-export default ({ ctx, width, height, grid }) => {
-  //TODO determine width and height of each rectangle..
-  // TODO
+export const drawSeed = ({
+  ctx,
+  canvasHeight,
+  canvasWidth,
+  seed,
+  seedWidth,
+  seedHeight
+}) => {
+  const rectWidth = Math.floor(canvasWidth / seedHeight);
+  const rectHight = Math.floor(canvasWidth / seedWidth);
 
-  const boardHeight = grid.length;
-  const boardWidth = grid.length > 0 ? grid[0].length : 0;
-
-  const rectWidth = Math.floor(width / boardWidth);
-  const rectHight = Math.floor(height / boardHeight);
-
-  for (let i = 0; i < boardWidth; i++) {
-    for (let j = 0; j < boardHeight; j++) {
-      const x_start = i * rectWidth;
-      const y_start = j * rectHight;
+  for (let x = 0; x < seedWidth; x++) {
+    for (let y = 0; y < seedHeight; y++) {
+      const x_start = x * rectWidth;
+      const y_start = y * rectHight;
 
       ctx.moveTo(x_start, y_start);
-      ctx.fillStyle = grid[j][i];
+      ctx.fillStyle = seed[x][y];
       ctx.fillRect(x_start, y_start, rectWidth, rectHight);
     }
   }
 };
+
+//TODO: create drawGrid (same as drawSeed only the colors have to be mapped)
