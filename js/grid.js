@@ -20,7 +20,8 @@ export const GRID_DESCRIPTION = {
 export const generateGrid = ({
   seed,
   isWall = ({ seed, point }) => seed[point[0]][point[1]] === colormap.blue,
-  isRoom = ({ seed, point }) => seed[point[0]][point[1]] === colormap.background,
+  isRoom = ({ seed, point }) =>
+    seed[point[0]][point[1]] === colormap.background,
   isPillar = ({ seed, point }) => seed[point[0]][point[1]] === colormap.red
 }) =>
   seed.map((column, x) =>

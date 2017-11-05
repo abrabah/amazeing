@@ -7,6 +7,7 @@ import {
 } from "./grid-helper";
 import { GRID_DESCRIPTION } from "./grid";
 
+// note! this array contains column-arrays! ergo grid[x][y]..
 const grid = [
   [GRID_DESCRIPTION.PILLAR, GRID_DESCRIPTION.ROOM, GRID_DESCRIPTION.PILLAR],
   [GRID_DESCRIPTION.ROOM, GRID_DESCRIPTION.WALL_OPEN, GRID_DESCRIPTION.PILLAR],
@@ -40,9 +41,9 @@ test("find all rooms in a grid", t => {
 });
 
 test("filter out rooms that are on path", t => {
-  const candidates = [[0, 1], [0, 2]];
+  const candidates = [[0, 1], [0, 2], [2, 0]];
   const roomsOnPath = findRoomsNotOnPath({ grid, candidates });
 
-  t.true(roomsOnPath.length == 1);
+  t.deepEqual(roomsOnPath.length, 1);
   t.truthy(roomsOnPath.find(containsPoint([0, 1])));
 });

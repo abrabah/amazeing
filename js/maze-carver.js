@@ -1,8 +1,8 @@
 import { GRID_DESCRIPTION } from "./grid";
 import {
   findNeighborsOfType,
-  listRooms,
-  findRoomsNotOnPath
+  findRoomsNotOnPath,
+  listIndicesOfAllRooms
 } from "./grid-helper";
 
 const findNeighborWalls = ({ grid, point }) =>
@@ -13,14 +13,17 @@ const findNeighborWalls = ({ grid, point }) =>
   });
 
 //TODO: padd grid to ensure that to ensure that the the maze is walled in?
-export default ({
+export const carveMaze = ({
   grid,
   gridWidth,
   gridHeight,
-  selectStartRoom = rooms => rooms[0],
+  selectStartRoom = ({ grid, rooms }) => rooms[0],
   selectWallToWisit = walls => 0
 }) => {
-  const startPosition = selectStartRoom({ grid, rooms: listRooms(grid) });
+  const startPosition = selectStartRoom({
+    grid,
+    rooms: listIndicesOfAllRooms(grid)
+  });
   grid[startPosition[1]][startPosition[0]] = GRID_DESCRIPTION.ROOM_ON_PATH;
 
   const wallsToWisit = [findNeighborWalls({ grid, point: startPosition })];
