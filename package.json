@@ -10,11 +10,15 @@
     "test": "ava"
   },
   "ava": {
-    "babel": "inherit", 
-    "require": ["babel-register"]
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
   },
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   },
   "devDependencies": {
     "ava": "^0.23.0",

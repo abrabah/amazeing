@@ -2,14 +2,19 @@ import test from "ava";
 import {
   findNeighborsOfType,
   containsPoint,
-  listIndicesOfAllRooms
+  listIndicesOfAllRooms,
+  findRoomsNotOnPath
 } from "./grid-helper";
 import { GRID_DESCRIPTION } from "./grid";
 
 const grid = [
   [GRID_DESCRIPTION.PILLAR, GRID_DESCRIPTION.ROOM, GRID_DESCRIPTION.PILLAR],
   [GRID_DESCRIPTION.ROOM, GRID_DESCRIPTION.WALL_OPEN, GRID_DESCRIPTION.PILLAR],
-  [GRID_DESCRIPTION.ROOM, GRID_DESCRIPTION.WALL_OPEN, GRID_DESCRIPTION.ROOM]
+  [
+    GRID_DESCRIPTION.ROOM_ON_PATH,
+    GRID_DESCRIPTION.WALL_OPEN,
+    GRID_DESCRIPTION.ROOM
+  ]
 ];
 
 test("given a point, find all adjacent rooms", t => {
@@ -32,4 +37,12 @@ test("find all rooms in a grid", t => {
   t.truthy(rooms.find(containsPoint([0, 1])));
   t.truthy(rooms.find(containsPoint([0, 2])));
   t.truthy(rooms.find(containsPoint([2, 2])));
+});
+
+test("filter out rooms that are on path", t => {
+  const candidates = [[0, 1], [0, 2]];
+  const roomsOnPath = findRoomsNotOnPath({ grid, candidates });
+
+  t.true(roomsOnPath.length == 1);
+  t.truthy(roomsOnPath.find(containsPoint([0, 1])));
 });

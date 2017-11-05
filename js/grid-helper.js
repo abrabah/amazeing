@@ -3,6 +3,9 @@ import { GRID_DESCRIPTION } from "./grid";
 export const containsPoint = ([x, y] = point) => ([_x, _y] = otherPoint) =>
   _x == x && _y == y;
 
+export const findRoomsNotOnPath = ({ grid, candidates = [] }) =>
+  candidates.filter(([x, y]) => grid[y][x] !== GRID_DESCRIPTION.ROOM_ON_PATH);
+
 export const findNeighborsOfType = ({
   grid,
   point,

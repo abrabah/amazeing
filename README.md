@@ -4,17 +4,21 @@ An attempt to implement some of the ideas discussed at gamasutra [Algorithms for
 
 ## setup
 
-Run the following commands to get started 
+Run the following commands to get started
 
-### Yarn (recommended) 
+### Yarn (recommended)
 
-1. `yarn` 
-2. `yarn run watch`
+1. `yarn`
+1. `yarn run watch`
 
 ### npm (if you don't have yarn)
 
-1. `npm install` 
-2. `npm run watch`
+1. `npm install`
+1. `npm run watch`
+
+## Testing
+
+Want to run some tests? No Problem! Tests are written in [ava](https://github.com/avajs/ava), you can run them by running `yarn run test` or `npm run test`. Test can be set up to run in watch mode by running `yarn run test --watch` or `npm run test -- --watch`
 
 ## TODO
 
