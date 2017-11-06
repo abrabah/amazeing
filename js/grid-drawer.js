@@ -1,19 +1,13 @@
 import { GRID_DESCRIPTION } from "./grid";
 import colormap from "./colors";
+import { CANVAS_HEIGHT, CANVAS_WIDTH, GRID_HEIGHT, GRID_WIDTH } from "./config";
 
-const draw = ({
-  ctx,
-  canvasHeight,
-  canvasWidth,
-  array2d,
-  arrayWidth,
-  arrayHeight
-}) => {
-  const rectWidth = Math.floor(canvasWidth / arrayWidth);
-  const rectHight = Math.floor(canvasWidth / arrayHeight);
+const draw = ({ ctx, array2d }) => {
+  const rectWidth = Math.floor(CANVAS_WIDTH / GRID_WIDTH);
+  const rectHight = Math.floor(CANVAS_HEIGHT / GRID_HEIGHT);
 
-  for (let x = 0; x < arrayWidth; x++) {
-    for (let y = 0; y < arrayHeight; y++) {
+  for (let x = 0; x < GRID_WIDTH; x++) {
+    for (let y = 0; y < GRID_HEIGHT; y++) {
       const x_start = x * rectWidth;
       const y_start = y * rectHight;
 
@@ -24,32 +18,14 @@ const draw = ({
   }
 };
 
-export const drawSeed = ({
-  ctx,
-  canvasHeight,
-  canvasWidth,
-  seed,
-  seedWidth,
-  seedHeight
-}) => {
+export const drawSeed = ({ ctx, seed }) => {
   draw({
     ctx,
-    canvasHeight,
-    canvasWidth,
-    array2d: seed,
-    arrayWidth: seedWidth,
-    arrayHeight: seedHeight
+    array2d: seed
   });
 };
 
-export const drawGrid = ({
-  ctx,
-  canvasHeight,
-  canvasWidth,
-  grid,
-  gridHeight,
-  gridWidth
-}) => {
+export const drawGrid = ({ ctx, grid }) => {
   const coloredGrid = grid.map((column, y) =>
     column.map((elm, x) => {
       switch (elm) {
@@ -60,7 +36,6 @@ export const drawGrid = ({
         case GRID_DESCRIPTION.PILLAR:
           return colormap.violet;
         default:
-          console.log(`got illegal grid description ${elm} at [${x},${y}]`);
           return colormap.red;
       }
     })
@@ -68,10 +43,6 @@ export const drawGrid = ({
 
   draw({
     ctx,
-    canvasHeight,
-    canvasWidth,
-    array2d: coloredGrid,
-    arrayHeight: gridHeight,
-    arrayWidth: gridWidth
+    array2d: coloredGrid
   });
 };

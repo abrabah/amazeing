@@ -1,4 +1,7 @@
 import { GRID_DESCRIPTION } from "./grid";
+import "babel-polyfill";
+import { GRID_HEIGHT, GRID_WIDTH } from "./config";
+
 import {
   findNeighborsOfType,
   findRoomsNotOnPath,
@@ -13,13 +16,11 @@ const findNeighborWalls = ({ grid, point }) =>
   });
 
 //TODO: padd grid to ensure that to ensure that the the maze is walled in?
-export const carveMaze = ({
+export function* carveMaze({
   grid,
-  gridWidth,
-  gridHeight,
   selectStartRoom = ({ grid, rooms }) => rooms[0],
   selectWallToWisit = walls => Math.floor(Math.random() * walls.length)
-}) => {
+}) {
   const startPosition = selectStartRoom({
     grid,
     rooms: listIndicesOfAllRooms(grid)
@@ -52,7 +53,8 @@ export const carveMaze = ({
         findNeighborWalls({ grid, point: roomNotOnPath }).forEach(elm =>
           wallsToWisit.push(elm)
         );
+        yield grid;
       }
     }
   }
-};
+}

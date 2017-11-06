@@ -1,4 +1,5 @@
 import colormap from "./colors";
+import { GRID_HEIGHT, GRID_WIDTH } from "./config";
 
 //TODO: does kernels belong here?
 const kernels = {
@@ -35,15 +36,11 @@ export const generateGrid = ({
     })
   );
 
-export const generateSeed = ({
-  gridHeight,
-  gridWidth,
-  kernel = kernels.blueWhiteRed
-}) => {
-  return new Array(gridWidth)
+export const generateSeed = (kernel = kernels.blueWhiteRed) => {
+  return new Array(GRID_WIDTH)
     .fill(0)
     .map((_, x) =>
-      new Array(gridHeight)
+      new Array(GRID_HEIGHT)
         .fill(0)
         .map((_, y) => kernel.map[x % kernel.width][y % kernel.height])
     );

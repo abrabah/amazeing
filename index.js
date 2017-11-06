@@ -1,51 +1,45 @@
 import { drawSeed, drawGrid } from "./js/grid-drawer";
 import { generateSeed, generateGrid } from "./js/grid";
 import { carveMaze } from "./js/maze-carver";
+import { Animator } from "./js/animator";
 
-const canvasWidth = 500;
-const canvasHeight = 500;
-
-const gridWidth = 33;
-const gridHeight = 33;
+import {
+  GRID_HEIGHT,
+  GRID_WIDTH,
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH
+} from "./js/config";
 
 function initCanvasAndReturn2dContext(canvasId) {
   const canvas = document.querySelector(canvasId);
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeight;
+  canvas.width = CANVAS_WIDTH;
+  canvas.height = CANVAS_HEIGHT;
 
   const context = canvas.getContext("2d");
 
   return context;
 }
-//TODO: rename grid to seed?
+
 window.onload = () => {
   const ctx = initCanvasAndReturn2dContext("#canvas-seed");
 
-  const seed = generateSeed({ gridHeight, gridWidth });
+  const seed = generateSeed();
 
   drawSeed({
     ctx,
-    canvasHeight,
-    canvasWidth,
+    canvasHeight: CANVAS_HEIGHT,
+    canvasWidth: CANVAS_WIDTH,
     seed,
-    seedHeight: gridHeight,
-    seedWidth: gridWidth
+    seedHeight: GRID_HEIGHT,
+    seedWidth: GRID_WIDTH
   });
 
   const grid = generateGrid({ seed });
-  carveMaze({
-    grid,
-    gridWidth,
-    gridHeight
+  const mazeGenerator = carveMaze({
+    grid
   });
-
   const maze_ctx = initCanvasAndReturn2dContext("#canvas-maze");
-  drawGrid({
-    ctx: maze_ctx,
-    canvasHeight,
-    canvasWidth,
-    grid,
-    gridHeight,
-    gridWidth
-  });
+
+  const animator = new Animator();
+  animator.animate({ generator: mazeGenerator, ctx: maze_ctx});
 };
