@@ -1,6 +1,7 @@
 import { GRID_DESCRIPTION } from "./grid";
 import "babel-polyfill";
 import { GRID_HEIGHT, GRID_WIDTH } from "./config";
+import colors from "./colors";
 
 import {
   findNeighborsOfType,
@@ -26,6 +27,8 @@ export function* carveMaze({
     rooms: listIndicesOfAllRooms(grid)
   });
   grid[startPosition[0]][startPosition[1]] = GRID_DESCRIPTION.ROOM_ON_PATH;
+
+  yield [[...startPosition, colors.background]];
 
   const wallsToWisit = findNeighborWalls({ grid, point: startPosition });
 
@@ -53,7 +56,10 @@ export function* carveMaze({
         findNeighborWalls({ grid, point: roomNotOnPath }).forEach(elm =>
           wallsToWisit.push(elm)
         );
-        yield grid;
+        yield [
+          [...wall, colors.background],
+          [...roomNotOnPath, colors.background]
+        ];
       }
     }
   }

@@ -1,7 +1,8 @@
-import { drawSeed, drawGrid } from "./js/grid-drawer";
+import { drawSeed, drawPoint } from "./js/grid-drawer";
 import { generateSeed, generateGrid } from "./js/grid";
 import { carveMaze } from "./js/maze-carver";
 import { Animator } from "./js/animator";
+import colorMap from "./js/colors";
 
 import {
   GRID_HEIGHT,
@@ -40,6 +41,13 @@ window.onload = () => {
   });
   const maze_ctx = initCanvasAndReturn2dContext("#canvas-maze");
 
+  drawPoint({
+    ctx: maze_ctx,
+    points: [[0, 0, colorMap.foreground]],
+    pointHeight: Math.floor(CANVAS_HEIGHT / GRID_HEIGHT) * GRID_HEIGHT,
+    pointWidth: Math.floor(CANVAS_WIDTH / GRID_WIDTH) * GRID_WIDTH
+  });
+
   const animator = new Animator();
-  animator.animate({ generator: mazeGenerator, ctx: maze_ctx});
+  animator.animate({ generator: mazeGenerator, ctx: maze_ctx });
 };

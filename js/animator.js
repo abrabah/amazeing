@@ -1,5 +1,5 @@
-import { drawGrid } from "./grid-drawer";
-import {ANIMATION_FPS} from './config';
+import { drawPoint } from "./grid-drawer";
+import { ANIMATION_FPS } from "./config";
 
 export class Animator {
   constructor() {
@@ -16,8 +16,6 @@ export class Animator {
 
   _animate() {
     if (!this.done) {
-      requestAnimationFrame(this._animate.bind(this));
-
       const now = Date.now();
 
       const elapsed = now - this.then;
@@ -28,12 +26,14 @@ export class Animator {
         const { value, done } = this.generator.next();
         this.done = done;
         if (!done) {
-          drawGrid({
+          drawPoint({
             ctx: this.ctx,
-            grid: value
+            points: value
           });
         }
       }
+
+      requestAnimationFrame(this._animate.bind(this));
     } else {
       console.log("animation complete");
     }

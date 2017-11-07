@@ -11,7 +11,6 @@ const draw = ({ ctx, array2d }) => {
       const x_start = x * rectWidth;
       const y_start = y * rectHight;
 
-      ctx.moveTo(x_start, y_start);
       ctx.fillStyle = array2d[x][y];
       ctx.fillRect(x_start, y_start, rectWidth, rectHight);
     }
@@ -44,5 +43,20 @@ export const drawGrid = ({ ctx, grid }) => {
   draw({
     ctx,
     array2d: coloredGrid
+  });
+};
+
+const pointHeight = Math.floor(CANVAS_WIDTH / GRID_WIDTH);
+const pointWidth = Math.floor(CANVAS_HEIGHT / GRID_HEIGHT);
+
+export const drawPoint = ({
+  ctx,
+  points,
+  pointWidth = Math.floor(CANVAS_WIDTH / GRID_WIDTH),
+  pointHeight = Math.floor(CANVAS_HEIGHT / GRID_HEIGHT)
+}) => {
+  points.forEach(([x, y, fillColor] = point) => {
+    ctx.fillStyle = fillColor;
+    ctx.fillRect(x * pointWidth, y * pointHeight, pointWidth, pointHeight);
   });
 };
