@@ -4,17 +4,12 @@ import { carveMaze } from "./js/maze-carver";
 import { Animator } from "./js/animator";
 import colorMap from "./js/colors";
 
-import {
-  GRID_HEIGHT,
-  GRID_WIDTH,
-  CANVAS_HEIGHT,
-  CANVAS_WIDTH
-} from "./js/config";
+import { MAZE_HEIGHT, MAZE_WIDTH, DOT_WIDTH, DOT_HEIGHT } from "./js/config";
 
 function initCanvasAndReturn2dContext(canvasId) {
   const canvas = document.querySelector(canvasId);
-  canvas.width = CANVAS_WIDTH;
-  canvas.height = CANVAS_HEIGHT;
+  canvas.width = MAZE_WIDTH * DOT_WIDTH;
+  canvas.height = MAZE_HEIGHT * DOT_HEIGHT;
 
   const context = canvas.getContext("2d");
 
@@ -28,11 +23,7 @@ window.onload = () => {
 
   drawSeed({
     ctx,
-    canvasHeight: CANVAS_HEIGHT,
-    canvasWidth: CANVAS_WIDTH,
-    seed,
-    seedHeight: GRID_HEIGHT,
-    seedWidth: GRID_WIDTH
+    seed
   });
 
   const grid = generateGrid({ seed });
@@ -43,9 +34,9 @@ window.onload = () => {
 
   drawPoint({
     ctx: maze_ctx,
-    points: [[0, 0, colorMap.foreground]],
-    pointHeight: Math.floor(CANVAS_HEIGHT / GRID_HEIGHT) * GRID_HEIGHT,
-    pointWidth: Math.floor(CANVAS_WIDTH / GRID_WIDTH) * GRID_WIDTH
+    pointHeight: MAZE_HEIGHT * DOT_HEIGHT,
+    pointWidth: MAZE_WIDTH * DOT_WIDTH,
+    points: [[0, 0, colorMap.foreground]]
   });
 
   const animator = new Animator();

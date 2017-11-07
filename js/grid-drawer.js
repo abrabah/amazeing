@@ -1,18 +1,15 @@
 import { GRID_DESCRIPTION } from "./grid";
 import colormap from "./colors";
-import { CANVAS_HEIGHT, CANVAS_WIDTH, GRID_HEIGHT, GRID_WIDTH } from "./config";
+import { DOT_HEIGHT, DOT_WIDTH, MAZE_HEIGHT, MAZE_WIDTH } from "./config";
 
 const draw = ({ ctx, array2d }) => {
-  const rectWidth = Math.floor(CANVAS_WIDTH / GRID_WIDTH);
-  const rectHight = Math.floor(CANVAS_HEIGHT / GRID_HEIGHT);
-
-  for (let x = 0; x < GRID_WIDTH; x++) {
-    for (let y = 0; y < GRID_HEIGHT; y++) {
-      const x_start = x * rectWidth;
-      const y_start = y * rectHight;
+  for (let x = 0; x < MAZE_WIDTH; x++) {
+    for (let y = 0; y < MAZE_HEIGHT; y++) {
+      const x_start = x * DOT_WIDTH;
+      const y_start = y * DOT_HEIGHT;
 
       ctx.fillStyle = array2d[x][y];
-      ctx.fillRect(x_start, y_start, rectWidth, rectHight);
+      ctx.fillRect(x_start, y_start, DOT_WIDTH, DOT_HEIGHT);
     }
   }
 };
@@ -46,14 +43,11 @@ export const drawGrid = ({ ctx, grid }) => {
   });
 };
 
-const pointHeight = Math.floor(CANVAS_WIDTH / GRID_WIDTH);
-const pointWidth = Math.floor(CANVAS_HEIGHT / GRID_HEIGHT);
-
 export const drawPoint = ({
   ctx,
   points,
-  pointWidth = Math.floor(CANVAS_WIDTH / GRID_WIDTH),
-  pointHeight = Math.floor(CANVAS_HEIGHT / GRID_HEIGHT)
+  pointWidth = DOT_WIDTH,
+  pointHeight = DOT_HEIGHT
 }) => {
   points.forEach(([x, y, fillColor] = point) => {
     ctx.fillStyle = fillColor;

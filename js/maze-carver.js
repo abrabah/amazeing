@@ -1,6 +1,6 @@
 import { GRID_DESCRIPTION } from "./grid";
 import "babel-polyfill";
-import { GRID_HEIGHT, GRID_WIDTH } from "./config";
+import { MAZE_HEIGHT, MAZE_WIDTH } from "./config";
 import colors from "./colors";
 
 import {
