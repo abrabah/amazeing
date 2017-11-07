@@ -22,5 +22,6 @@ Want to run some tests? No Problem! Tests are written in [ava](https://github.co
 
 ## TODO
 
-* need a mapping between color and wall/room/pillar..   
+* create an abstraction for the 2dMatrix
+* clean code!!
 * create message function and bind it to window.. Use it for displaying messages.. 
