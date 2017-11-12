@@ -3,11 +3,6 @@ import "babel-polyfill";
 import { MAZE_HEIGHT, MAZE_WIDTH } from "./config";
 import colors from "./colors";
 
-import {
-  findNeighborsOfType,
-  findRoomsNotOnPath,
-  listIndicesOfAllRooms
-} from "./grid-helper";
 
 const findNeighborWalls = ({ grid, point }) =>
   findNeighborsOfType({

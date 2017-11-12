@@ -6,7 +6,7 @@ export default class Array2d {
   }
 
   get([x, y]) {
-    return this.array[y][x];
+    return this.array[y] && this.array[y][x];
   }
 
   set([x, y], val) {
@@ -46,7 +46,7 @@ export default class Array2d {
     return [[0, -1], [-1, 0], [1, 0], [0, 1]]
       .map(([x, y] = elm) => [x + point[0], y + point[1]])
       .filter(
-        ([x, y] = point) => this.array[y] && types.includes(this.array[y][x])
+        ([x, y] = point) => types.includes(this.get([x,y]))
       )
       .map(point => [...point, this.get(point)]);
   }
