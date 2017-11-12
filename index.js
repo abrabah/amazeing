@@ -4,7 +4,13 @@ import { carveMaze } from "./js/maze-carver";
 import { Animator } from "./js/animator";
 import colorMap from "./js/colors";
 
-import { MAZE_HEIGHT, MAZE_WIDTH, DOT_WIDTH, DOT_HEIGHT } from "./js/config";
+import {
+  MAZE_HEIGHT,
+  MAZE_WIDTH,
+  DOT_WIDTH,
+  DOT_HEIGHT,
+  ANIMATE
+} from "./js/config";
 
 function initCanvasAndReturn2dContext(canvasId) {
   const canvas = document.querySelector(canvasId);
@@ -39,6 +45,10 @@ window.onload = () => {
     points: [[0, 0, colorMap.foreground]]
   });
 
-  const animator = new Animator();
-  animator.animate({ generator: mazeGenerator, ctx: maze_ctx });
+  const animator = new Animator({ generator: mazeGenerator, ctx: maze_ctx });
+  if (ANIMATE) {
+    animator.animate();
+  } else {
+    animator.skipAnimation();
+  }
 };

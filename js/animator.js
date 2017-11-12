@@ -2,13 +2,13 @@ import { drawPoint } from "./grid-drawer";
 import { ANIMATION_FPS } from "./config";
 
 export class Animator {
-  constructor() {
+  constructor({ generator, ctx }) {
+    this.generator = generator;
+    this.ctx = ctx;
     this.done = false;
   }
 
-  animate({ generator, ctx }) {
-    this.generator = generator;
-    this.ctx = ctx;
+  animate() {
     this.fpsInteval = 1000 / ANIMATION_FPS;
     this.then = Date.now();
     this._animate();
@@ -32,10 +32,27 @@ export class Animator {
           });
         }
       }
-
       requestAnimationFrame(this._animate.bind(this));
     } else {
       console.log("animation complete");
     }
+  }
+
+  skipAnimation() {
+    const points = [];
+
+    while (!this.done) {
+      const { value, done } = this.generator.next();
+      if (!done) {
+        points.push(...value);
+      }
+      this.done = done;
+    }
+    drawPoint({
+      ctx: this.ctx,
+      points
+    });
+
+    console.log("animation complete");
   }
 }

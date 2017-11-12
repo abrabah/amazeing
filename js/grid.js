@@ -42,12 +42,4 @@ export const generateSeed = (kernel = kernels.blueWhiteRed) => {
     }
   }
   return arr;
-
-  // return new Array(MAZE_WIDTH)
-  //   .fill(0)
-  //   .map((_, x) =>
-  //     new Array(MAZE_HEIGHT)
-  //       .fill(0)
-  //       .map((_, y) => kernel.map[x % kernel.width][y % kernel.height])
-  //   );
 };
