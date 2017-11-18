@@ -1,6 +1,6 @@
 import { GRID_DESCRIPTION } from "./grid";
 import "babel-polyfill";
-import { MAZE_HEIGHT, MAZE_WIDTH } from "./config";
+import { MAZE_HEIGHT, MAZE_WIDTH, WALL_STRATEGY, ROOM_STRATEGY } from "./config";
 import colors from "./colors";
 
 
@@ -14,8 +14,8 @@ const findNeighborWalls = ({ grid, point }) =>
 //TODO: padd grid to ensure that to ensure that the the maze is walled in?
 export function* carveMaze({
   grid,
-  selectStartRoom = ({ grid, rooms }) => rooms[0],
-  selectWallToWisit = walls => Math.floor(Math.random() * walls.length)
+  selectStartRoom = ROOM_STRATEGY,
+  selectWallToWisit = WALL_STRATEGY
 }) {
   const startPosition = selectStartRoom({
     grid,

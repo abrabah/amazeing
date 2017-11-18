@@ -9,7 +9,8 @@ import {
   MAZE_WIDTH,
   DOT_WIDTH,
   DOT_HEIGHT,
-  ANIMATE
+  ANIMATE,
+  DRAW_SEED
 } from "./js/config";
 
 function initCanvasAndReturn2dContext(canvasId) {
@@ -27,10 +28,12 @@ window.onload = () => {
 
   const seed = generateSeed();
 
-  drawSeed({
-    ctx,
-    seed
-  });
+  if(DRAW_SEED){
+    drawSeed({
+      ctx,
+      seed
+    });
+}
 
   const grid = generateGrid({ seed });
   const mazeGenerator = carveMaze({

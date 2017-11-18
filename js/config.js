@@ -8,4 +8,9 @@ export const DOT_HEIGHT = 9;
 
 export const ANIMATION_FPS = 10;
 
-export const ANIMATE = false;
+export const ANIMATE = true;
+export const DRAW_SEED = true; 
+
+export const WALL_STRATEGY = walls => Math.floor(Math.random() * walls.length);
+
+export const ROOM_STRATEGY = ({ grid, rooms }) => rooms[0];
