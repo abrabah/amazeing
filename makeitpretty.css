@@ -15,10 +15,10 @@ html body {
 #canvas-container {
     display: flex;
     justify-content: center;
+
 }
 
 canvas {
-    /* border: 4px solid #D98E04; */
     margin: 3px;
 }
 
