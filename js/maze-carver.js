@@ -27,7 +27,7 @@ export function* carveMaze({
 
   grid.set(startPosition, GRID_DESCRIPTION.ROOM_ON_PATH);
 
-  yield [[...startPosition, colors.background]];
+  yield [[...startPosition, colors.room]];
 
   const wallsToWisit = grid.findNeighborsOfType({
     point: startPosition,
@@ -61,8 +61,8 @@ export function* carveMaze({
           })
           .forEach(elm => wallsToWisit.push(elm));
         yield [
-          [...wall, colors.background],
-          [...roomNotOnPath, colors.background]
+          [...wall, colors.wall],
+          [...roomNotOnPath, colors.wall]
         ];
       }
     }

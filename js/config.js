@@ -6,7 +6,7 @@ export const MAZE_HEIGHT = 49;
 export const DOT_WIDTH = 9;
 export const DOT_HEIGHT = 9;
 
-export const ANIMATION_FPS = 10;
+export const ANIMATION_FPS = 3;
 
 export const ANIMATE = true;
 export const DRAW_SEED = true; 

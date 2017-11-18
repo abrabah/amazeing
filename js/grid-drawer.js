@@ -26,10 +26,10 @@ export const drawGrid = ({ ctx, grid }) => {
     switch (elm) {
       case GRID_DESCRIPTION.ROOM_ON_PATH:
       case GRID_DESCRIPTION.WALL_OPEN:
-        return colormap.background;
+        return colormap.room;
       case GRID_DESCRIPTION.WALL_CLOSED:
       case GRID_DESCRIPTION.PILLAR:
-        return colormap.violet;
+        return colormap.wall;
       default:
         return colormap.red;
     }

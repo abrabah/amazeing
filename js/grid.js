@@ -8,7 +8,7 @@ const kernels = {
   blueWhiteRed: {
     width: 2,
     height: 2,
-    map: [[colormap.red, colormap.blue], [colormap.blue, colormap.background]]
+    map: [[colormap.pillar, colormap.wall], [colormap.wall, colormap.room]]
   }
 };
 
@@ -22,9 +22,9 @@ export const GRID_DESCRIPTION = {
 
 export const generateGrid = ({
   seed,
-  isWall = ({ seed, point, elm }) => elm === colormap.blue,
-  isRoom = ({ seed, point, elm }) => elm === colormap.background,
-  isPillar = ({ seed, point, elm }) => elm === colormap.red
+  isWall = ({ seed, point, elm }) => elm === colormap.wall,
+  isRoom = ({ seed, point, elm }) => elm === colormap.room,
+  isPillar = ({ seed, point, elm }) => elm === colormap.pillar
 }) =>
   seed.map((point, elm) => {
     if (isWall({ seed, point, elm })) return GRID_DESCRIPTION.WALL_CLOSED;

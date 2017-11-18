@@ -45,7 +45,7 @@ window.onload = () => {
     ctx: maze_ctx,
     pointHeight: MAZE_HEIGHT * DOT_HEIGHT,
     pointWidth: MAZE_WIDTH * DOT_WIDTH,
-    points: [[0, 0, colorMap.foreground]]
+    points: [[0, 0, colorMap.wall]]
   });
 
   const animator = new Animator({ generator: mazeGenerator, ctx: maze_ctx });
