@@ -1,8 +1,12 @@
 import { GRID_DESCRIPTION } from "./grid";
 import "babel-polyfill";
-import { MAZE_HEIGHT, MAZE_WIDTH, WALL_STRATEGY, ROOM_STRATEGY } from "./config";
+import {
+  MAZE_HEIGHT,
+  MAZE_WIDTH,
+  WALL_STRATEGY,
+  ROOM_STRATEGY
+} from "./config";
 import colors from "./colors";
-
 
 const findNeighborWalls = ({ grid, point }) =>
   findNeighborsOfType({
@@ -17,13 +21,18 @@ export function* carveMaze({
   selectStartRoom = ROOM_STRATEGY,
   selectWallToWisit = WALL_STRATEGY
 }) {
-  const startPosition = selectStartRoom({
-    grid,
-    rooms: grid.findIndexOfType([
-      GRID_DESCRIPTION.ROOM,
-      GRID_DESCRIPTION.ROOM_ON_PATH
-    ])
-  });
+  const rooms = grid.findIndexOfType([
+    GRID_DESCRIPTION.ROOM,
+    GRID_DESCRIPTION.ROOM_ON_PATH
+  ]);
+
+  const startPosition =
+    rooms[
+      selectStartRoom({
+        grid,
+        rooms
+      })
+    ];
 
   grid.set(startPosition, GRID_DESCRIPTION.ROOM_ON_PATH);
 
@@ -35,7 +44,10 @@ export function* carveMaze({
   });
 
   while (wallsToWisit.length > 0) {
-    const index = selectWallToWisit(wallsToWisit);
+    const index = selectWallToWisit({
+      walls: wallsToWisit,
+      start: startPosition
+    });
     const [wall] = wallsToWisit.splice(index, 1);
 
     const adjacentRooms = grid.findNeighborsOfType({
@@ -60,10 +72,7 @@ export function* carveMaze({
             types: [GRID_DESCRIPTION.WALL_CLOSED]
           })
           .forEach(elm => wallsToWisit.push(elm));
-        yield [
-          [...wall, colors.wall],
-          [...roomNotOnPath, colors.wall]
-        ];
+        yield [[...wall, colors.wall], [...roomNotOnPath, colors.wall]];
       }
     }
   }

@@ -45,9 +45,7 @@ export default class Array2d {
   findNeighborsOfType({ point, types = [] }) {
     return [[0, -1], [-1, 0], [1, 0], [0, 1]]
       .map(([x, y] = elm) => [x + point[0], y + point[1]])
-      .filter(
-        ([x, y] = point) => types.includes(this.get([x,y]))
-      )
+      .filter(([x, y] = point) => types.includes(this.get([x, y])))
       .map(point => [...point, this.get(point)]);
   }
 }

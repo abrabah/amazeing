@@ -3,5 +3,5 @@
 export default {
   wall: "#3B4349",
   pillar: "#688C6A",
-  room: "#F2CB05",
+  room: "#F2CB05"
 };
