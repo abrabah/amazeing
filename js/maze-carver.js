@@ -34,6 +34,10 @@ export function* carveMaze({
       })
     ];
 
+  console.log(
+    `generating maze from pos (${startPosition[0]}, ${startPosition[1]})`
+  );
+
   grid.set(startPosition, GRID_DESCRIPTION.ROOM_ON_PATH);
 
   yield [[...startPosition, colors.room]];

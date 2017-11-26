@@ -17,14 +17,14 @@ function initCanvasAndReturn2dContext(canvasId) {
   const canvas = document.createElement("canvas");
 
   canvas.id = canvasId;
-  
+
   canvas.width = MAZE_WIDTH * DOT_WIDTH;
   canvas.height = MAZE_HEIGHT * DOT_HEIGHT;
-  
+
   const context = canvas.getContext("2d");
-  
+
   document.querySelector("#canvas-container").appendChild(canvas);
-  
+
   return context;
 }
 
