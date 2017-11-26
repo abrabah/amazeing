@@ -15,7 +15,6 @@ const findNeighborWalls = ({ grid, point }) =>
     types: [GRID_DESCRIPTION.WALL_CLOSED]
   });
 
-//TODO: padd grid to ensure that to ensure that the the maze is walled in?
 export function* carveMaze({
   grid,
   selectStartRoom = ROOM_STRATEGY,
@@ -47,12 +46,22 @@ export function* carveMaze({
     types: [GRID_DESCRIPTION.WALL_CLOSED]
   });
 
+  let timestep = 0;
+  let prevIndex = 0;
+  let prev = startPosition;
+
   while (wallsToWisit.length > 0) {
     const index = selectWallToWisit({
       walls: wallsToWisit,
-      start: startPosition
+      start: startPosition,
+      timestep: timestep++,
+      prevIndex,
+      prev
     });
+
     const [wall] = wallsToWisit.splice(index, 1);
+    prevIndex = index;
+    prev = wall.slice(0, 2);
 
     const adjacentRooms = grid.findNeighborsOfType({
       point: wall,
