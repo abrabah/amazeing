@@ -1,15 +1,15 @@
 // How many dots does the maze consist of?
-export const MAZE_WIDTH = 49;
-export const MAZE_HEIGHT = 49;
+export const MAZE_WIDTH = 39;
+export const MAZE_HEIGHT = 39;
 
 // How large (in pixels) is each dot?
 export const DOT_WIDTH = 9;
 export const DOT_HEIGHT = 9;
 
-export const ANIMATION_FPS = 30;
+export const ANIMATION_FPS = 60;
 
 export const ANIMATE = true;
-export const DRAW_SEED = false;
+export const DRAW_SEED = true;
 
 export const ROOM_STRATEGY = ({ grid, rooms }) => 0;
 
@@ -49,4 +49,4 @@ const WALL_STRATEGIES = {
   }
 };
 
-export const WALL_STRATEGY = WALL_STRATEGIES.prev;
+export const WALL_STRATEGY = WALL_STRATEGIES.take_first;
