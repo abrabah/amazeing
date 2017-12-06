@@ -16,8 +16,4 @@ Run the following commands to get started
 1. `npm install`
 1. `npm run watch`
 
-## TODO
-
-* create an abstraction for the 2dMatrix
-* clean code!!
-* create message function and bind it to window.. Use it for displaying messages.. 
+Once you are up and running, open `js/config.js` and start hacking ;)
